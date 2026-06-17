@@ -158,8 +158,9 @@ img {
 }
 
 .tv-frame {
-  width: min(92vw, calc(58vh * 1.22));
-  max-width: 520px;
+  width: min(88vw, 480px);
+  max-width: 480px;
+  margin: 0 auto;
   filter: drop-shadow(0 28px 64px rgba(0, 0, 0, 0.7));
 }
 
@@ -502,7 +503,8 @@ h1 {
   }
 
   .tv-frame {
-    width: min(520px, calc(62vh * 1.22));
+    width: min(480px, calc(56vh * 1.28));
+    max-width: 480px;
   }
 
   .hero-foot {
