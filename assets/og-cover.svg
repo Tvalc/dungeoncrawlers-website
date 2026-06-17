@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Dungeon's TV  watch the run, steer the chaos">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0604"/>
+      <stop offset="55%" stop-color="#1a0f08"/>
+      <stop offset="100%" stop-color="#2a1408"/>
+    </linearGradient>
+    <linearGradient id="torch" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#f0a030" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#f0a030" stop-opacity="0.45"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <ellipse cx="180" cy="520" rx="220" ry="180" fill="url(#torch)"/>
+  <ellipse cx="1020" cy="520" rx="220" ry="180" fill="url(#torch)"/>
+  <rect x="360" y="120" width="480" height="300" rx="16" fill="#120c08" stroke="#6b4420" stroke-width="4"/>
+  <rect x="392" y="152" width="416" height="236" rx="8" fill="#1f1208"/>
+  <text x="600" y="290" text-anchor="middle" fill="#f0a030" font-family="Georgia, serif" font-size="72" font-weight="700">Dungeon&apos;s TV</text>
+  <text x="600" y="350" text-anchor="middle" fill="#c9b8a0" font-family="Segoe UI, sans-serif" font-size="28">Watch the run. Vote from the crowd.</text>
+  <text x="600" y="520" text-anchor="middle" fill="#8a7058" font-family="Segoe UI, sans-serif" font-size="22">dungeoncrawlers.tv</text>
+</svg>

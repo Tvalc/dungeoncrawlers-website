@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dungeon's TV is an interactive dungeon run you watch live and steer from the crowd. Show up, vote, and change what happens next.">
+  <link rel="canonical" href="https://dungeoncrawlers.tv/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dungeoncrawlers.tv/">
+  <meta property="og:title" content="Dungeon's TV | Watch the run. Steer the chaos.">
+  <meta property="og:description" content="A live dungeon game where the audience watches the run and participates through website actions.">
+  <meta property="og:image" content="https://dungeoncrawlers.tv/assets/og-cover.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dungeon's TV | Watch the run. Steer the chaos.">
+  <meta name="twitter:description" content="A live dungeon game where the audience watches the run and participates through website actions.">
+  <meta name="twitter:image" content="https://dungeoncrawlers.tv/assets/og-cover.svg">
+  <title>Dungeon's TV | Watch the run. Steer the chaos.</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="brand" href="/">
+      <img src="assets/logo.svg" alt="" width="34" height="34">
+      <span>Dungeon's TV</span>
+    </a>
+    <div class="header-actions">
+      <a class="btn btn--ghost" href="#how-it-works">How it works</a>
+      <a class="btn btn--primary" href="#notify">Get launch updates</a>
+    </div>
+  </header>
+
+  <main id="main" class="shell">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <span class="eyebrow">Coming soon</span>
+        <h1 id="hero-title">Watch the dungeon. Vote from the crowd.</h1>
+        <p class="lead">
+          Dungeon's TV is a live game built for spectators and participants.
+          Tune in to watch the run unfold, then jump in from your browser to
+          push doors, pick paths, spend gold, and tilt the odds.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn--primary" href="#notify">Notify me at launch</a>
+          <a class="btn btn--ghost" href="#how-it-works">See how it plays</a>
+        </div>
+      </div>
+
+      <div class="tv-frame" aria-hidden="true">
+        <div class="tv-screen">
+          <div>
+            <div class="tv-screen__label">Live feed</div>
+            <div class="tv-screen__title">The party reaches a fork in the torchlight.</div>
+          </div>
+        </div>
+        <div class="tv-stand"></div>
+      </div>
+    </section>
+
+    <section class="panel-grid" aria-label="Core ideas">
+      <article class="panel">
+        <h3>Built for the audience</h3>
+        <p>Streams are the stage. The site is the controller. Everyone in chat can see the same moment and act on it.</p>
+      </article>
+      <article class="panel">
+        <h3>Crowd-driven choices</h3>
+        <p>Open a door, buy a potion, bet on the fight, or send the party into the trap room. Actions resolve in real time.</p>
+      </article>
+      <article class="panel">
+        <h3>Short, replayable runs</h3>
+        <p>Each broadcast is a contained dungeon crawl with visible stakes, so new viewers can jump in without a lore wiki.</p>
+      </article>
+    </section>
+
+    <section class="how-it-works" id="how-it-works" aria-labelledby="how-title">
+      <h2 id="how-title">How it works</h2>
+      <p class="lead">One screen to watch. One page to play. No install required.</p>
+      <ol class="steps">
+        <li>
+          <span class="step-num">1</span>
+          <strong>Show up for the stream</strong>
+          <p>Watch the run on Twitch, YouTube, or wherever the broadcast goes live.</p>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <strong>Open dungeoncrawlers.tv</strong>
+          <p>When a decision window opens, the site lights up with buttons, votes, and limited-time actions.</p>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <strong>Change what happens next</strong>
+          <p>The crowd's choices feed back into the game. The dungeon reacts on stream.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="notify" id="notify" aria-labelledby="notify-title">
+      <h2 id="notify-title">Get notified when we go live</h2>
+      <p class="lead">Leave your email and we'll ping you for the first playtest broadcast and site launch.</p>
+      <form class="notify-form" id="notify-form">
+        <label class="visually-hidden" for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" required autocomplete="email">
+        <button class="btn btn--primary" type="submit">Join the list</button>
+      </form>
+      <p class="notify-note">Replace this form with Mailchimp, Buttondown, or your ESP once you pick one.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer shell">
+    <p>&copy; <span id="year"></span> Dungeon's TV. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    document.getElementById("notify-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const subject = encodeURIComponent("Dungeon's TV launch list");
+      const body = encodeURIComponent("Please add me to the launch list:\n\n" + email);
+      window.location.href = "mailto:hello@dungeoncrawlers.tv?subject=" + subject + "&body=" + body;
+    });
+  </script>
+</body>
+</html>
