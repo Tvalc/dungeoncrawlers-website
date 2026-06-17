@@ -144,7 +144,7 @@ img {
   align-items: center;
   min-height: 100vh;
   min-height: 100dvh;
-  padding: 3.5rem clamp(0.75rem, 2vw, 1.5rem) 2rem;
+  padding: 3rem clamp(0.5rem, 1.5vw, 1rem) 1rem;
 }
 
 .tv-hero {
@@ -154,19 +154,19 @@ img {
   justify-content: center;
   width: 100%;
   min-height: 0;
-  padding: 0.5rem 0 1rem;
+  padding: 0.25rem 0 0.5rem;
 }
 
 .tv-frame {
-  width: min(88vw, 480px);
-  max-width: 480px;
+  width: min(96vw, 1120px);
+  max-width: 1120px;
   margin: 0 auto;
-  filter: drop-shadow(0 28px 64px rgba(0, 0, 0, 0.7));
+  filter: drop-shadow(0 32px 80px rgba(0, 0, 0, 0.75));
 }
 
 .tv-cabinet {
-  padding: clamp(0.55rem, 1.5vw, 0.85rem);
-  border-radius: clamp(22px, 4vw, 32px);
+  padding: clamp(0.45rem, 1vw, 0.7rem);
+  border-radius: clamp(16px, 2vw, 24px);
   background: linear-gradient(165deg, #3a2818 0%, #221610 35%, #140c08 100%);
   border: 1px solid rgba(255, 190, 110, 0.14);
   box-shadow:
@@ -175,8 +175,8 @@ img {
 }
 
 .tv-bezel {
-  padding: clamp(0.85rem, 2.2vw, 1.25rem) clamp(0.85rem, 2.2vw, 1.15rem) clamp(0.7rem, 1.8vw, 1rem);
-  border-radius: clamp(14px, 2.5vw, 20px);
+  padding: clamp(0.55rem, 1.2vw, 0.85rem) clamp(0.55rem, 1.2vw, 0.85rem) clamp(0.45rem, 1vw, 0.65rem);
+  border-radius: clamp(10px, 1.5vw, 14px);
   background: linear-gradient(180deg, #1e1410 0%, #0c0806 100%);
   border: 2px solid rgba(0, 0, 0, 0.55);
   box-shadow:
@@ -187,77 +187,31 @@ img {
 .tv-screen {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
-  border-radius: 14% / 12%;
+  aspect-ratio: 16 / 9;
+  border-radius: clamp(6px, 1vw, 10px);
   overflow: hidden;
-  background: #0d0806;
+  background: #000;
   box-shadow:
-    0 0 0 3px rgba(20, 12, 8, 0.95) inset,
-    0 0 0 5px rgba(60, 40, 24, 0.5) inset,
-    0 0 40px rgba(245, 166, 35, 0.12) inset;
+    0 0 0 2px rgba(20, 12, 8, 0.95) inset,
+    0 0 0 4px rgba(60, 40, 24, 0.45) inset;
 }
 
-/* Dungeon scene inside the TV */
-.tv-scene {
+.tv-game {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, #1a0f0a 0%, #0a0604 100%);
-}
-
-.tv-scene__glow {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 45% 55% at 28% 72%, rgba(255, 140, 50, 0.55), transparent 60%),
-    radial-gradient(ellipse 35% 45% at 72% 68%, rgba(255, 100, 40, 0.4), transparent 55%),
-    radial-gradient(ellipse 80% 40% at 50% 100%, rgba(80, 40, 20, 0.5), transparent 70%);
-  animation: torch-flicker 4s ease-in-out infinite;
-}
-
-.tv-scene__corridor {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 88%;
-  height: 62%;
-  transform: translateX(-50%);
-  background:
-    linear-gradient(90deg, #1a1008 0%, #2a1810 22%, #3d2418 50%, #2a1810 78%, #1a1008 100%);
-  clip-path: polygon(8% 100%, 42% 18%, 58% 18%, 92% 100%);
-  opacity: 0.9;
-}
-
-.tv-scene__fork {
-  position: absolute;
-  bottom: 8%;
-  left: 50%;
-  width: 2px;
-  height: 45%;
-  transform: translateX(-50%);
-  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.85));
-  box-shadow: -28px 0 0 rgba(0, 0, 0, 0.5), 28px 0 0 rgba(0, 0, 0, 0.5);
-}
-
-.tv-scene__party {
-  position: absolute;
-  bottom: 14%;
-  left: 50%;
-  width: 12px;
-  height: 18px;
-  transform: translateX(-50%);
-  border-radius: 3px 3px 0 0;
-  background: #f0c878;
-  box-shadow:
-    -14px 4px 0 -2px #c87840,
-    14px 2px 0 -2px #a06030,
-    0 -8px 0 -2px #e8b060;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #000;
 }
 
 .tv-scanlines {
   position: absolute;
   inset: 0;
+  z-index: 2;
   pointer-events: none;
-  opacity: 0.35;
+  opacity: 0.18;
   background: repeating-linear-gradient(
     0deg,
     rgba(0, 0, 0, 0) 0,
@@ -271,11 +225,10 @@ img {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 3;
   pointer-events: none;
   border-radius: inherit;
-  background: radial-gradient(ellipse 88% 78% at 50% 45%, rgba(255, 255, 255, 0.07), transparent 58%);
-  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.35);
+  background: radial-gradient(ellipse 90% 80% at 50% 45%, rgba(255, 255, 255, 0.04), transparent 58%);
 }
 
 .tv-screen::after {
@@ -285,13 +238,13 @@ img {
   z-index: 3;
   pointer-events: none;
   border-radius: inherit;
-  background: radial-gradient(ellipse at center, transparent 38%, rgba(0, 0, 0, 0.62) 100%);
+  background: radial-gradient(ellipse at center, transparent 52%, rgba(0, 0, 0, 0.45) 100%);
 }
 
 .tv-badge {
   position: absolute;
-  top: clamp(0.65rem, 2vw, 1rem);
-  left: clamp(0.65rem, 2vw, 1rem);
+  top: clamp(0.5rem, 1.2vw, 0.75rem);
+  left: clamp(0.5rem, 1.2vw, 0.75rem);
   z-index: 4;
   display: flex;
   align-items: center;
@@ -315,28 +268,16 @@ img {
 }
 
 .tv-caption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 4;
-  margin: 0;
-  padding: clamp(1.25rem, 3vw, 2rem) clamp(0.85rem, 2.5vw, 1.25rem) clamp(0.7rem, 1.8vw, 0.95rem);
-  font-family: "Instrument Serif", Georgia, serif;
-  font-size: clamp(0.95rem, 2.4vw, 1.25rem);
-  line-height: 1.2;
-  color: #ffe8cc;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.82), transparent);
+  display: none;
 }
 
 .tv-face {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
-  margin-top: clamp(0.55rem, 1.5vw, 0.85rem);
-  padding: 0 0.15rem;
+  gap: 0.5rem;
+  margin-top: clamp(0.35rem, 1vw, 0.55rem);
+  padding: 0 0.1rem;
 }
 
 .tv-speaker {
@@ -404,12 +345,12 @@ img {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
-/* Copy below fold line — tight */
+/* Copy below TV — compact */
 .hero-foot {
   width: 100%;
-  max-width: 32rem;
+  max-width: 36rem;
   text-align: center;
-  padding: 0.5rem 0 1rem;
+  padding: 0.35rem 0 0.75rem;
 }
 
 .eyebrow {
@@ -422,17 +363,17 @@ img {
 }
 
 h1 {
-  margin: 0 0 0.45rem;
+  margin: 0 0 0.35rem;
   font-family: "Instrument Serif", Georgia, serif;
-  font-size: clamp(1.75rem, 4.5vw, 2.35rem);
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
   font-weight: 400;
   line-height: 1.08;
   letter-spacing: -0.01em;
 }
 
 .tagline {
-  margin: 0 0 1.1rem;
-  font-size: 0.95rem;
+  margin: 0 0 0.85rem;
+  font-size: 0.9rem;
   color: var(--text-soft);
 }
 
@@ -503,8 +444,8 @@ h1 {
   }
 
   .tv-frame {
-    width: min(480px, calc(56vh * 1.28));
-    max-width: 480px;
+    width: min(96vw, 1120px);
+    max-width: 1120px;
   }
 
   .hero-foot {
