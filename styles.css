@@ -153,35 +153,47 @@ img {
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: min(1100px, 96vw);
   min-height: 0;
   padding: 0.5rem 0 1rem;
 }
 
 .tv-frame {
-  width: 100%;
-  filter: drop-shadow(0 32px 80px rgba(0, 0, 0, 0.65));
+  width: min(92vw, calc(58vh * 1.22));
+  max-width: 520px;
+  filter: drop-shadow(0 28px 64px rgba(0, 0, 0, 0.7));
+}
+
+.tv-cabinet {
+  padding: clamp(0.55rem, 1.5vw, 0.85rem);
+  border-radius: clamp(22px, 4vw, 32px);
+  background: linear-gradient(165deg, #3a2818 0%, #221610 35%, #140c08 100%);
+  border: 1px solid rgba(255, 190, 110, 0.14);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.65) inset,
+    0 12px 0 rgba(0, 0, 0, 0.25);
 }
 
 .tv-bezel {
-  padding: clamp(0.65rem, 1.8vw, 1.1rem);
-  border-radius: clamp(18px, 2.5vw, 28px);
-  background: linear-gradient(165deg, #2a1c16 0%, var(--tv-frame) 40%, #120a08 100%);
-  border: 1px solid rgba(255, 200, 120, 0.12);
+  padding: clamp(0.85rem, 2.2vw, 1.25rem) clamp(0.85rem, 2.2vw, 1.15rem) clamp(0.7rem, 1.8vw, 1rem);
+  border-radius: clamp(14px, 2.5vw, 20px);
+  background: linear-gradient(180deg, #1e1410 0%, #0c0806 100%);
+  border: 2px solid rgba(0, 0, 0, 0.55);
   box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.8) inset,
-    0 0 60px rgba(245, 166, 35, 0.06);
+    0 0 0 1px rgba(255, 200, 120, 0.08) inset,
+    0 4px 16px rgba(0, 0, 0, 0.35) inset;
 }
 
 .tv-screen {
   position: relative;
-  aspect-ratio: 16 / 9;
-  border-radius: clamp(8px, 1.2vw, 14px);
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 14% / 12%;
   overflow: hidden;
   background: #0d0806;
   box-shadow:
-    0 0 0 2px rgba(0, 0, 0, 0.9) inset,
-    0 0 48px rgba(245, 166, 35, 0.15) inset;
+    0 0 0 3px rgba(20, 12, 8, 0.95) inset,
+    0 0 0 5px rgba(60, 40, 24, 0.5) inset,
+    0 0 40px rgba(245, 166, 35, 0.12) inset;
 }
 
 /* Dungeon scene inside the TV */
@@ -254,18 +266,32 @@ img {
   );
 }
 
+.tv-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(ellipse 88% 78% at 50% 45%, rgba(255, 255, 255, 0.07), transparent 58%);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.35);
+}
+
 .tv-screen::after {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 3;
   pointer-events: none;
-  background: radial-gradient(ellipse at center, transparent 42%, rgba(0, 0, 0, 0.55) 100%);
+  border-radius: inherit;
+  background: radial-gradient(ellipse at center, transparent 38%, rgba(0, 0, 0, 0.62) 100%);
 }
 
 .tv-badge {
   position: absolute;
   top: clamp(0.65rem, 2vw, 1rem);
   left: clamp(0.65rem, 2vw, 1rem);
+  z-index: 4;
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -292,21 +318,66 @@ img {
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 4;
   margin: 0;
-  padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 3vw, 1.5rem) clamp(0.85rem, 2vw, 1.1rem);
+  padding: clamp(1.25rem, 3vw, 2rem) clamp(0.85rem, 2.5vw, 1.25rem) clamp(0.7rem, 1.8vw, 0.95rem);
   font-family: "Instrument Serif", Georgia, serif;
-  font-size: clamp(1.1rem, 2.8vw, 1.65rem);
+  font-size: clamp(0.95rem, 2.4vw, 1.25rem);
   line-height: 1.2;
   color: #ffe8cc;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.82), transparent);
 }
 
-.tv-chin {
-  height: clamp(6px, 1vw, 10px);
-  margin: 0 clamp(12%, 18vw, 22%);
-  border-radius: 0 0 6px 6px;
-  background: linear-gradient(180deg, #1a1008, #0a0604);
+.tv-face {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: clamp(0.55rem, 1.5vw, 0.85rem);
+  padding: 0 0.15rem;
+}
+
+.tv-speaker {
+  flex: 1;
+  height: clamp(10px, 2vw, 14px);
+  border-radius: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.55) 0,
+    rgba(0, 0, 0, 0.55) 3px,
+    rgba(255, 200, 120, 0.06) 3px,
+    rgba(255, 200, 120, 0.06) 5px
+  );
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.tv-dials {
+  display: flex;
+  gap: clamp(0.35rem, 1vw, 0.55rem);
+  flex-shrink: 0;
+}
+
+.tv-dial {
+  width: clamp(14px, 2.8vw, 20px);
+  height: clamp(14px, 2.8vw, 20px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #5a4030, #1a1008 70%);
+  border: 1px solid rgba(255, 200, 120, 0.15);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.tv-dial::after {
+  content: "";
+  display: block;
+  width: 35%;
+  height: 2px;
+  margin: 42% auto 0;
+  background: rgba(255, 220, 180, 0.35);
+  transform: rotate(-32deg);
+  border-radius: 1px;
 }
 
 .tv-stand {
@@ -324,8 +395,8 @@ img {
 }
 
 .tv-stand__base {
-  width: clamp(120px, 22vw, 200px);
-  height: clamp(8px, 1.2vw, 12px);
+  width: clamp(100px, 42%, 180px);
+  height: clamp(10px, 1.4vw, 14px);
   margin-top: 2px;
   border-radius: 999px;
   background: linear-gradient(180deg, #2a1810, #120a08);
@@ -426,8 +497,12 @@ h1 {
   }
 
   .tv-hero {
-    flex: 1 1 68vh;
-    max-height: 72vh;
+    flex: 1 1 auto;
+    max-height: none;
+  }
+
+  .tv-frame {
+    width: min(520px, calc(62vh * 1.22));
   }
 
   .hero-foot {
