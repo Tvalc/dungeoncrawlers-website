@@ -52,16 +52,15 @@
                   <div class="tv-scene__fork"></div>
                   <div class="tv-scene__party"></div>
                 </div>
-                <button type="button" class="tv-tune-in" id="tv-tune-in">
-                  <span class="tv-tune-in__icon" aria-hidden="true">▶</span>
-                  <span class="tv-tune-in__title">Tune in</span>
-                  <span class="tv-tune-in__sub">Launch the live feed</span>
-                </button>
+                <iframe
+                  class="tv-feed"
+                  src="play/index.html"
+                  title="Dungeon Crawlers TV — live dungeon feed"
+                  loading="eager"
+                  scrolling="no"
+                  tabindex="-1"
+                ></iframe>
                 <div class="tv-scanlines" aria-hidden="true"></div>
-                <div class="tv-badge" aria-hidden="true">
-                  <span class="tv-badge__dot"></span>
-                  LIVE
-                </div>
               </div>
               <div class="tv-face" aria-hidden="true">
                 <div class="tv-speaker"></div>
@@ -98,20 +97,7 @@
   </footer>
 
   <script>
-    const MAKKO_PLAY_URL = "https://www.makko.ai/play/df07c779612f4338";
-
     document.getElementById("year").textContent = new Date().getFullYear();
-
-    document.getElementById("tv-tune-in").addEventListener("click", () => {
-      const margin = 24;
-      const w = Math.min(1280, window.screen.availWidth - margin * 2);
-      const h = Math.min(860, window.screen.availHeight - margin * 2);
-      const left = Math.round((window.screen.availWidth - w) / 2);
-      const top = Math.round((window.screen.availHeight - h) / 2);
-      const features = `popup=yes,width=${w},height=${h},left=${left},top=${top}`;
-      const feed = window.open(MAKKO_PLAY_URL, "dungeoncrawlers-feed", features);
-      if (!feed) window.location.assign(MAKKO_PLAY_URL);
-    });
 
     document.getElementById("notify-form").addEventListener("submit", (event) => {
       event.preventDefault();
