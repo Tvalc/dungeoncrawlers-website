@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Dungeon Crawlers TV — UX Asset Checklist</title>
+<style>
+  :root{
+    --bg:#0c0d14; --panel:#14161f; --panel2:#1b1e2a; --ink:#ece7d6; --muted:#9aa0b0;
+    --gold:#e0b656; --green:#45e07a; --line:rgba(150,150,180,.18);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.55 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;}
+  .wrap{max-width:980px;margin:0 auto;padding:32px 20px 80px}
+  h1{font:700 30px/1.2 Georgia,serif;color:var(--gold);margin:0 0 6px}
+  .sub{color:var(--muted);margin:0 0 18px}
+  .meta{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:0 0 22px}
+  .meta b{color:var(--gold)} .meta code{color:var(--green)}
+  .swatch{display:inline-block;width:11px;height:11px;border-radius:3px;vertical-align:middle;margin:0 4px}
+  .progress{position:sticky;top:0;z-index:5;background:linear-gradient(var(--bg),var(--bg) 70%,rgba(12,13,20,0));
+    padding:10px 0 12px;margin:0 0 8px;font-weight:700}
+  .bar{height:8px;border-radius:5px;background:#000;border:1px solid var(--line);overflow:hidden;margin-top:6px}
+  .bar > i{display:block;height:100%;background:var(--gold);width:0;transition:width .2s}
+  h2{font:700 13px/1 ui-monospace,monospace;letter-spacing:.08em;color:var(--gold);
+    text-transform:uppercase;margin:30px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:0 0 12px;
+    display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start}
+  .card.done{opacity:.55}
+  .card input{width:20px;height:20px;margin-top:3px;accent-color:var(--green);cursor:pointer}
+  .name{font:700 18px/1.3 Georgia,serif}
+  .card.done .name{text-decoration:line-through;text-decoration-color:var(--muted)}
+  .path{color:var(--green);font:13px ui-monospace,monospace}
+  .set{color:var(--muted);font:italic 13px Georgia,serif;margin:2px 0 8px}
+  .prompt{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:10px 12px;
+    color:#d8d3c2;font:15px/1.5 Georgia,serif}
+  .copy{margin-top:8px;background:transparent;border:1px solid var(--line);color:var(--muted);
+    border-radius:7px;padding:5px 11px;font:600 12px ui-monospace,monospace;cursor:pointer}
+  .copy:hover{color:var(--gold);border-color:var(--gold)}
+  .foot{color:var(--muted);margin-top:34px;font-size:14px}
+  a{color:var(--green)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Dungeon Crawlers TV — UX / Interface Assets</h1>
+  <p class="sub">The interface art to make, in build order. Tick items off as you go — your progress is saved in this browser.</p>
+
+  <div class="meta">
+    <div><b>Make them in Makko</b> with the <b>Anime</b> style toggle on. Each item notes the mode/aspect. For frames &amp; overlays, aim for an <b>empty / transparent center</b> so the live game and text sit inside.</div>
+    <div style="margin-top:8px"><b>Where they go:</b> drop the PNG at the path shown into <code>play/art/ui/…</code> — the renderer loads each one as soon as it exists.</div>
+    <div style="margin-top:8px"><b>Palette:</b>
+      <span class="swatch" style="background:#0c0d14;border:1px solid #333"></span>dungeon dark <code>#0c0d14</code> ·
+      <span class="swatch" style="background:#45e07a"></span>VEX green <code>#45e07a</code> ·
+      <span class="swatch" style="background:#e0b656"></span>gold <code>#e0b656</code> ·
+      rarity <span class="swatch" style="background:#b8c0cc"></span><code>#b8c0cc</code>
+      <span class="swatch" style="background:#4aa3ff"></span><code>#4aa3ff</code>
+      <span class="swatch" style="background:#c06bff"></span><code>#c06bff</code>
+      <span class="swatch" style="background:#ffb02e"></span><code>#ffb02e</code></div>
+  </div>
+
+  <div class="progress">Progress: <span id="count">0 / 27</span>
+    <div class="bar"><i id="fill"></i></div>
+  </div>
+
+  <div id="list"></div>
+
+  <p class="foot">Cast portraits, monster art &amp; comic panels are tracked separately (in the game repo's <code>ART_PROMPTS.md</code>).</p>
+</div>
+
+<script>
+const ASSETS = [
+ {g:"A · The frame (the TV itself) — make these first", items:[
+  {n:"CRT television bezel", p:"art/ui/tv-frame.png", s:"Anime · Scene · 16:9 · screen area empty/transparent",
+   t:"A chunky retro CRT television set seen straight-on: thick rounded charcoal-plastic bezel with subtle gold trim, two little dial knobs and a speaker grille along the bottom, faint screen glare. The screen area is a clean empty rectangle (transparent cut-out) so gameplay shows through. Symmetrical, centered, no characters."},
+  {n:"Studio backdrop", p:"art/ui/backdrop.png", s:"Anime · Scene · 16:9",
+   t:"A moody late-night game-show studio backdrop for a dungeon broadcast: dark stone-and-neon walls, faint overhead spotlights, hints of cables and old monitors, deep charcoal #0c0d14 with gold and green accents. Empty stage, no characters, no text."},
+  {n:"Channel logo lockup", p:"art/ui/logo.png", s:"Anime · Front · 1:1 · transparent",
+   t:"A bold logo lockup reading 'DUNGEON CRAWLERS TV' in chunky comic-book lettering with a tiny TV-with-skull mark, gold #e0b656 with a green outline, on a transparent background. Clean, centered, no scene."},
+ ]},
+ {g:"B · Live HUD (the broadcast overlay)", items:[
+  {n:"Dungeon viewport frame", p:"art/ui/viewport-frame.png", s:"Anime · Scene · 4:3 · center empty/transparent",
+   t:"An ornate rectangular broadcast frame for a live gameplay window: a thin glowing gold edge with small corner flourishes and a little notch top-left for a LIVE light, the entire center empty/transparent. Dark, premium, symmetrical."},
+  {n:"Lower-third name banner", p:"art/ui/lower-third.png", s:"Anime · Scene · wide · transparent around",
+   t:"A sleek broadcast lower-third banner: a horizontal dark-glass bar with a bright colored accent cap on the left, a thin gold underline, and room for two lines of text — but EMPTY of any text. Transparent around the bar."},
+  {n:"Top status bar", p:"art/ui/status-bar.png", s:"Anime · Scene · wide · transparent ends",
+   t:"A slim broadcast top status strip with three empty rounded pods spaced across it (left, center, right) for a label, a timer, and a counter; dark glass with gold and green accents, no text, transparent ends."},
+  {n:"Minimap panel frame", p:"art/ui/map-frame.png", s:"Anime · Scene · 1:1 · interior faint/empty",
+   t:"A small square panel frame for a dungeon minimap: dark screen-meets-parchment interior with a faint grid, gold corner brackets and a tiny header tab, mostly empty inside. No text."},
+  {n:"Tide / momentum meter", p:"art/ui/tide-meter.png", s:"Anime · Scene · wide · empty fill",
+   t:"A horizontal tug-of-war meter bar like a sports win-probability bar: left half tinted green (heroes), right half tinted red-purple (dungeon), a glowing diamond divider in the middle, empty/neutral fill, slim dark frame. No text."},
+  {n:"Skill / ability bar", p:"art/ui/skill-bar.png", s:"Anime · Scene · wide · transparent",
+   t:"A row of about six empty rounded-hex ability slots for an RPG action bar: glowing rims, a faint cooldown sweep ring on each, dark glass with gold and cyan accents, on a transparent background. No icons inside."},
+  {n:"Vitals (HP/MP) frame", p:"art/ui/vitals-frame.png", s:"Anime · Front · wide · transparent",
+   t:"A compact vitals plate: two stacked rounded bars (top green for HP, bottom blue for MP) in a slim dark frame with a tiny heart and droplet icon at the left, bars shown empty, transparent background."},
+  {n:"Party feed strip", p:"art/ui/party-strip.png", s:"Anime · Scene · wide · transparent",
+   t:"A horizontal strip of about six empty circular portrait holders with thin gold rims and small under-labels, dark glass, evenly spaced, transparent background. No faces, no text."},
+ ]},
+ {g:"C · Overlays & cards (the dig-in + the drama)", items:[
+  {n:"Dossier / codex panel", p:"art/ui/panel-dossier.png", s:"Anime · Scene · 16:9 · interior empty",
+   t:"A large ornate overlay panel for a fantasy-TV character dossier: dark glassy interior with a soft vignette, an elegant gold filigree border, and a faint vertical divider splitting it into two columns. Completely empty inside. No text."},
+  {n:"Roster grid panel", p:"art/ui/panel-roster.png", s:"Anime · Scene · 16:9 · interior empty",
+   t:"A large overlay panel for a cast roster: dark interior with a subtle grid of empty rounded card slots (3 across), gold-trim border and a header bar, all empty. No text, no faces."},
+  {n:"Bestiary panel", p:"art/ui/panel-bestiary.png", s:"Anime · Scene · 16:9 · interior empty",
+   t:"A large overlay panel for a monster bestiary: dark purple-tinged interior with two big empty creature-card wells, eerie gold-and-violet border, a header bar. Empty, no text."},
+  {n:"Interview card", p:"art/ui/interview-card.png", s:"Anime · Scene · wide · transparent",
+   t:"A wide talk-show interview card: two rounded portrait wells (host on the left, guest on the right) joined by a dark caption bar in the middle, gold trim, a small INTERVIEW notch in a corner. Wells and bar are empty. Transparent around the card."},
+  {n:"Ceremony / fanfare frame", p:"art/ui/ceremony-frame.png", s:"Anime · Scene · 16:9 · center empty",
+   t:"A celebratory freeze-frame banner: radiant gold sunburst rays and confetti sparks bursting from behind an empty central plaque, comic-book POW energy, dramatic. The center plaque is empty. Transparent corners."},
+  {n:"Episode / cold-open card", p:"art/ui/episode-card.png", s:"Anime · Scene · 16:9 · center empty",
+   t:"A cinematic title-card backdrop for a serialized TV cold open: a dark dramatic stage with a soft gold glow, faint film grain and curtain-edge vignette, a clear empty center for a title. 16:9, no text."},
+  {n:"Season title card", p:"art/ui/season-card.png", s:"Anime · Scene · 16:9 · center empty",
+   t:"A bold season-title backdrop: trophies and stolen relics motif, dark stage with gold light rays and drifting embers, a grand empty center for a season number. 16:9, no text."},
+  {n:"“While you were away” card", p:"art/ui/away-card.png", s:"Anime · Scene · 4:3 · center empty",
+   t:"A small cozy notice-card frame for a 'while you were away' recap: a dark rounded panel with a sleepy crescent moon and little zzz in one corner, warm gold trim, empty center for a few lines. No text."},
+  {n:"Versus scoreboard", p:"art/ui/scoreboard.png", s:"Anime · Scene · wide · empty numbers",
+   t:"A sportsy versus scoreboard plate: a HEROES side and a DUNGEON side flanking two empty score wells, a streak-flame in the middle, dark frame with green vs red-purple accents. Numbers empty, no text otherwise."},
+ ]},
+ {g:"D · Components & kits (reused everywhere)", items:[
+  {n:"VEX host plate", p:"art/ui/vex-plate.png", s:"Anime · Front · 1:1 · transparent",
+   t:"A circular host nameplate frame for a mischievous show host: a glowing green ring with a small 'HOST' ribbon tab at the bottom, dark inner well left empty, transparent background. No face."},
+  {n:"Rarity loot frames (×4)", p:"art/ui/rarity-{common,rare,epic,legendary}.png", s:"Anime · Front · 1:1 · transparent",
+   t:"A square loot-item frame border with ornate corners and a glowing edge, empty center, transparent background — make FOUR versions, one glowing in each rarity colour: common silver #b8c0cc, rare blue #4aa3ff, epic purple #c06bff, legendary orange #ffb02e."},
+  {n:"Broadcast badges", p:"art/ui/badge-{live,onair,odds}.png", s:"Anime · Front · 1:1 · transparent",
+   t:"A small set of rounded pill badges on transparent: a red 'LIVE' badge with a glowing dot, an amber 'ON AIR' tally-light badge, and a neutral odds/percentage tag. Matching dark-glass style, bold, tiny."},
+  {n:"Control icon set", p:"art/ui/icon-{pause,mute,expand,codex,roster,bestiary}.png", s:"Anime · Front · 1:1 · transparent",
+   t:"A matching set of simple bold icons on transparent, gold on dark: pause bars, a speaker/mute, an expand/fullscreen arrows, an open book (codex), a 3×3 grid of faces (roster), and a monster skull (bestiary). Consistent line weight, same size."},
+  {n:"Essence currency icon", p:"art/ui/icon-essence.png", s:"Anime · Front · 1:1 · transparent",
+   t:"A small glowing essence-currency icon: a faceted teal-green gem-orb with a soft inner light and a few sparkles, transparent background. Crisp, readable at small size."},
+  {n:"Comic-strip panel frame", p:"art/ui/comic-frame.png", s:"Anime · Scene · 4:3 · interior empty",
+   t:"A single comic-book panel frame with a bold black border and a slightly torn paper edge, the interior completely empty, transparent around it. Clean, printable look."},
+  {n:"Button plate", p:"art/ui/button.png", s:"Anime · Front · wide · transparent",
+   t:"A generic UI button plate: a rounded dark-glass pill with a gold rim and a soft top highlight, empty of text — provide a calm idle version and a brighter glowing hover version side by side. Transparent background."},
+ ]},
+];
+
+const KEY = "dctv-ux-done-v1";
+const done = JSON.parse(localStorage.getItem(KEY) || "{}");
+const list = document.getElementById("list");
+let total = 0;
+
+for (const sec of ASSETS) {
+  const h = document.createElement("h2"); h.textContent = sec.g; list.appendChild(h);
+  for (const a of sec.items) {
+    total++;
+    const id = a.p;
+    const card = document.createElement("div");
+    card.className = "card" + (done[id] ? " done" : "");
+    card.innerHTML =
+      '<input type="checkbox"' + (done[id] ? " checked" : "") + '>' +
+      '<div><div class="name"></div>' +
+      '<div class="path"></div><div class="set"></div>' +
+      '<div class="prompt"></div>' +
+      '<button class="copy">Copy prompt</button></div>';
+    card.querySelector(".name").textContent = a.n;
+    card.querySelector(".path").textContent = a.p;
+    card.querySelector(".set").textContent = a.s;
+    card.querySelector(".prompt").textContent = a.t;
+    const cb = card.querySelector("input");
+    cb.addEventListener("change", () => {
+      if (cb.checked) done[id] = 1; else delete done[id];
+      localStorage.setItem(KEY, JSON.stringify(done));
+      card.classList.toggle("done", cb.checked);
+      tally();
+    });
+    const btn = card.querySelector(".copy");
+    btn.addEventListener("click", () => {
+      navigator.clipboard.writeText(a.t).then(() => {
+        btn.textContent = "Copied ✓"; setTimeout(() => btn.textContent = "Copy prompt", 1200);
+      });
+    });
+    list.appendChild(card);
+  }
+}
+
+function tally() {
+  const n = Object.keys(done).length;
+  document.getElementById("count").textContent = n + " / " + total;
+  document.getElementById("fill").style.width = (total ? (n / total * 100) : 0) + "%";
+}
+tally();
+</script>
+</body>
+</html>
